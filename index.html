@@ -41,6 +41,8 @@
     border-bottom: 1px dashed var(--oro);
     cursor: help;
     white-space: nowrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   section{ position:relative; }
@@ -649,6 +651,7 @@
   footer .copy{ font-size: 11px; opacity:.6; }
 
   @media (max-width: 860px){
+    .wrap{ padding: 0 20px; }
     .nav-links{
       position:fixed; top:0; right:0; bottom:0;
       width: 240px;
@@ -665,6 +668,22 @@
     .dress-grid{ grid-template-columns: 1fr; }
     form{ grid-template-columns: 1fr; }
     .historia-photos{ order: 2; }
+    .boda-card{
+      padding: 28px 22px;
+    }
+    .boda-card .meta span:last-child,
+    .regalo-box,
+    .placeholder{
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      white-space: normal;
+    }
+    .regalo-box{
+      display:block;
+      width:100%;
+      max-width:100%;
+      padding: 20px 22px;
+    }
   }
 </style>
 </head>
@@ -712,8 +731,8 @@
     </div>
     <div class="historia-grid reveal">
       <div class="historia-photos">
-        <div class="photo-ph"><img src="img/judy_japon.JPG" alt="Foto de Raúl y Judith" class="photo-img"><span class="placeholder"></span></div>
-        <div class="photo-ph"><img src="img/raul_japon.JPG" alt="Foto del viaje a Japón" class="photo-img"><span class="placeholder"></span></div>
+        <div class="photo-ph"><img src="img/judy_japon.jpg" alt="Foto de Raúl y Judith" class="photo-img"><span class="placeholder"></span></div>
+        <div class="photo-ph"><img src="img/raul_japon.jpg" alt="Foto del viaje a Japón" class="photo-img"><span class="placeholder"></span></div>
       </div>
       <div class="historia-text">
         <div class="kanji-word">夕暮れ</div>
