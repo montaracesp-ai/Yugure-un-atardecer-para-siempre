@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raúl &amp; Judith · Yūgure</title>
+<style>
+  :root{
+    --indigo: #1F2A44;
+    --indigo-2: #263457;
+    --indigo-3: #2E3D63;
+    --terracota: #D97B4F;
+    --rosa: #D9718F;
+    --hibisco: #C1485A;
+    --oro: #B8935A;
+    --oro-claro: #C9A96A;
+    --piedra: #F4F0E9;
+    --off-white: #FBF8F3;
+    --texto-claro: #DDE1EA;
+    --texto-mute: #8A93A8;
+    --texto-oscuro: #3A3226;
+    --serif: Cambria, "Cormorant Garamond", Georgia, serif;
+    --sans: Calibri, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family: var(--sans);
+    background: var(--off-white);
+    color: var(--texto-oscuro);
+    overflow-x:hidden;
+  }
+  a{ text-decoration:none; color:inherit; }
+  ul{ list-style:none; }
+  img{ max-width:100%; display:block; }
+
+  .placeholder{
+    color: var(--oro);
+    font-style: italic;
+    border-bottom: 1px dashed var(--oro);
+    cursor: help;
+    white-space: nowrap;
+  }
+
+  section{ position:relative; }
+
+  .wrap{
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .eyebrow{
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* ---------- NAV ---------- */
+  #nav{
+    position: fixed;
+    top:0; left:0; right:0;
+    z-index: 500;
+    padding: 22px 0;
+    transition: background .4s ease, padding .4s ease, box-shadow .4s ease;
+  }
+  #nav.scrolled{
+    background: rgba(31,42,68,0.96);
+    padding: 14px 0;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+  }
+  #nav .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .nav-brand{
+    font-family: var(--serif);
+    font-size: 20px;
+    letter-spacing: 4px;
+    color: var(--off-white);
+  }
+  .nav-links{
+    display:flex;
+    gap: 34px;
+  }
+  .nav-links a{
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--texto-claro);
+    padding-bottom: 4px;
+    border-bottom: 1px solid transparent;
+    transition: color .3s, border-color .3s;
+  }
+  .nav-links a:hover{ color: var(--oro-claro); border-color: var(--oro-claro); }
+  .nav-toggle{ display:none; flex-direction:column; gap:5px; cursor:pointer; }
+  .nav-toggle span{ width:24px; height:2px; background:var(--off-white); }
+
+  /* ---------- HERO ---------- */
+  #inicio{
+    min-height: 100vh;
+    background: var(--indigo);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
+    padding: 140px 24px 80px;
+  }
+  .hero-circles{
+    position:absolute;
+    top: 6%;
+    left: 50%;
+    width: 640px; height:640px;
+    transform: translateX(-50%);
+    pointer-events:none;
+  }
+  .hero-circles span{
+    position:absolute;
+    border-radius:50%;
+    border: 1.5px solid;
+  }
+  .hero-circles .c1{ width:100%; height:100%; top:0; left:0; border-color: var(--oro); opacity:.55; }
+  .hero-circles .c2{ width:73%; height:73%; top:13%; left:13.5%; border-color: var(--terracota); opacity:.55; }
+  .hero-circles .c3{ width:52%; height:52%; top:24%; left:24%; border-color: var(--rosa); opacity:.55; }
+
+  .hero-content{ position:relative; z-index:2; max-width: 760px; }
+  .hero-eyebrow{
+    color: var(--off-white);
+    font-size: 13px;
+    letter-spacing: 4px;
+    font-weight:700;
+    margin-bottom: 18px;
+  }
+  .hero-title{
+    font-family: var(--serif);
+    font-weight:700;
+    font-size: clamp(64px, 12vw, 128px);
+    color: var(--off-white);
+    line-height: 1;
+    letter-spacing: 2px;
+  }
+  .hero-tagline{
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--terracota);
+    font-size: clamp(16px, 2.4vw, 21px);
+    margin-top: 22px;
+  }
+  .hero-divider{
+    width: 72px; height:1px;
+    background: var(--oro);
+    margin: 34px auto;
+  }
+  .hero-names{
+    font-family: var(--serif);
+    color: var(--off-white);
+    font-size: clamp(22px, 3.4vw, 30px);
+    letter-spacing: 3px;
+  }
+  .hero-date{
+    margin-top: 14px;
+    color: var(--oro-claro);
+    font-size: 15px;
+    letter-spacing: 2px;
+  }
+  .hero-footer{
+    margin-top: 44px;
+    color: var(--texto-mute);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .scroll-cue{
+    position:absolute;
+    bottom: 34px; left:50%;
+    transform: translateX(-50%);
+    color: var(--texto-mute);
+    font-size: 10px;
+    letter-spacing: 2px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+  }
+  .scroll-cue .line{
+    width:1px; height:34px;
+    background: linear-gradient(var(--oro), transparent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{opacity:.3} 50%{opacity:1} }
+
+  /* ---------- SECTION HEAD (reused motif) ---------- */
+  .section-head{
+    text-align:center;
+    max-width: 640px;
+    margin: 0 auto 56px;
+  }
+  .section-head .eyebrow{ color: var(--terracota); margin-bottom: 14px; }
+  .section-head h2{
+    font-family: var(--serif);
+    font-size: clamp(32px, 5vw, 46px);
+    font-weight:700;
+  }
+  .section-head p{
+    margin-top: 16px;
+    color: var(--texto-mute);
+    font-size: 15px;
+    line-height:1.7;
+    font-style: italic;
+    font-family: var(--serif);
+  }
+  .enso{
+    width: 40px; height:40px;
+    margin: 0 auto 18px;
+    border-radius:50%;
+    border: 1.5px solid var(--oro);
+    border-top-color: transparent;
+    transform: rotate(-40deg);
+  }
+
+  .reveal{
+    opacity:0;
+    transform: translateY(28px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+  .reveal.in{ opacity:1; transform:none; }
+
+  /* ---------- HISTORIA ---------- */
+  #historia{ background: var(--piedra); padding: 120px 0; }
+  .historia-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items:center;
+  }
+  .historia-photos{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .photo-ph{
+    aspect-ratio: 3/4;
+    background: linear-gradient(160deg, var(--indigo-2), var(--indigo));
+    border: 1px solid var(--oro);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: var(--oro-claro);
+    font-size: 12px;
+    text-align:center;
+    letter-spacing:1px;
+    font-style: italic;
+    padding: 12px;
+  }
+  .photo-ph:nth-child(2){ margin-top: 36px; }
+  .historia-text .kanji-word{
+    font-family: var(--serif);
+    font-size: 46px;
+    color: var(--terracota);
+    font-weight:700;
+    margin-bottom: 6px;
+  }
+  .historia-text .kanji-sub{
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: var(--texto-mute);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .historia-text p{
+    font-size: 16px;
+    line-height: 1.9;
+    color: #55503f;
+    margin-bottom: 16px;
+  }
+  .historia-text p:last-of-type{
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--indigo);
+    font-size: 18px;
+    margin-top: 24px;
+  }
+
+  /* ---------- LA BODA ---------- */
+  #la-boda{
+    background: var(--indigo);
+    padding: 120px 0;
+    color: var(--texto-claro);
+  }
+  #la-boda .section-head h2{ color: var(--off-white); }
+  .boda-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .boda-card{
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(184,147,90,0.35);
+    padding: 44px 36px;
+  }
+  .boda-card .icon{
+    width:52px; height:52px;
+    border-radius:50%;
+    border: 1px solid var(--oro);
+    display:flex; align-items:center; justify-content:center;
+    color: var(--oro-claro);
+    font-family: var(--serif);
+    font-size: 20px;
+    margin-bottom: 24px;
+  }
+  .boda-card h3{
+    font-family: var(--serif);
+    font-size: 26px;
+    color: var(--off-white);
+    margin-bottom: 6px;
+  }
+  .boda-card .venue{
+    color: var(--terracota);
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+  }
+  .boda-card .meta{
+    display:flex;
+    flex-direction:column;
+    gap: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+  .boda-card .meta span:first-child{
+    color: var(--texto-mute);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .boda-card p.desc{
+    font-size: 14.5px;
+    line-height: 1.8;
+    color: var(--texto-claro);
+    opacity:.85;
+  }
+
+  /* ---------- ITINERARIO ---------- */
+  #itinerario{ background: var(--off-white); padding: 120px 0; }
+  .timeline{
+    max-width: 640px;
+    margin: 0 auto;
+    position:relative;
+    padding-left: 40px;
+  }
+  .timeline::before{
+    content:'';
+    position:absolute;
+    left: 7px; top:6px; bottom:6px;
+    width:1px;
+    background: linear-gradient(var(--oro), var(--terracota), var(--rosa));
+  }
+  .t-item{
+    position:relative;
+    padding-bottom: 42px;
+  }
+  .t-item:last-child{ padding-bottom:0; }
+  .t-item::before{
+    content:'';
+    position:absolute;
+    left: -40px; top:4px;
+    width:15px; height:15px;
+    border-radius:50%;
+    background: var(--off-white);
+    border: 2px solid var(--oro);
+  }
+  .t-item .t-time{
+    font-family: var(--serif);
+    font-weight:700;
+    color: var(--terracota);
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+  .t-item .t-label{
+    font-size: 16px;
+    font-weight:700;
+    color: var(--indigo);
+    margin-bottom: 4px;
+  }
+  .t-item .t-desc{
+    font-size: 14px;
+    color: var(--texto-mute);
+  }
+
+  /* ---------- DRESS CODE ---------- */
+  #dress-code{ background: var(--piedra); padding: 120px 0; }
+  .palette-row{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap: 22px;
+    margin-bottom: 70px;
+  }
+  .swatch{
+    text-align:center;
+    width: 108px;
+  }
+  .swatch .dot{
+    width: 56px; height:56px;
+    border-radius:50%;
+    margin: 0 auto 10px;
+    border: 3px solid var(--off-white);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+  }
+  .swatch .name{ font-size: 12px; font-weight:700; color: var(--texto-oscuro); }
+  .swatch .hex{ font-size: 11px; color: var(--texto-mute); letter-spacing: .5px; }
+
+  .dress-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-bottom: 50px;
+  }
+  .dress-card{
+    background: var(--off-white);
+    padding: 32px 26px;
+    border-top: 2px solid var(--oro);
+  }
+  .dress-card h4{
+    font-family: var(--serif);
+    font-size: 20px;
+    color: var(--indigo);
+    margin-bottom: 12px;
+  }
+  .dress-card p{
+    font-size: 14px;
+    line-height: 1.75;
+    color: #5a5545;
+  }
+  .kit-box{
+    max-width: 720px;
+    margin: 0 auto;
+    text-align:center;
+    background: var(--indigo);
+    color: var(--texto-claro);
+    padding: 40px;
+  }
+  .kit-box h4{
+    font-family: var(--serif);
+    color: var(--oro-claro);
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+  .kit-box p{ font-size: 14.5px; line-height:1.8; }
+  .avoid-line{
+    text-align:center;
+    margin-top: 24px;
+    font-size: 13px;
+    color: var(--hibisco);
+    font-style: italic;
+  }
+
+  /* ---------- COMO LLEGAR ---------- */
+  #como-llegar{ background: var(--off-white); padding: 120px 0; }
+  .llegar-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+  .info-block h4{
+    font-family: var(--serif);
+    color: var(--indigo);
+    font-size: 21px;
+    margin-bottom: 16px;
+    padding-bottom:10px;
+    border-bottom: 1px solid #e6ded0;
+  }
+  .info-line{
+    display:flex;
+    justify-content:space-between;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px dashed #e6ded0;
+    font-size: 14px;
+  }
+  .info-line span:first-child{ color: var(--texto-mute); }
+  .info-line span:last-child{ text-align:right; font-weight:600; color: var(--texto-oscuro); }
+  .map-ph{
+    margin-top: 20px;
+    aspect-ratio: 16/10;
+    background: repeating-linear-gradient(135deg, #ece5d4, #ece5d4 10px, #e6ded0 10px, #e6ded0 20px);
+    border: 1px solid var(--oro);
+    display:flex; align-items:center; justify-content:center;
+    color: var(--texto-mute);
+    font-size: 13px;
+    font-style: italic;
+    text-align:center;
+    padding: 20px;
+  }
+  .hotel-list{ display:flex; flex-direction:column; gap:14px; margin-top:16px; }
+  .hotel-card{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background: var(--piedra);
+    padding: 16px 18px;
+    border-left: 2px solid var(--terracota);
+    font-size: 14px;
+  }
+  .hotel-card .h-name{ font-weight:700; color: var(--indigo); }
+  .hotel-card .h-meta{ font-size:12px; color: var(--texto-mute); }
+
+  /* ---------- REGALO ---------- */
+  #regalo{
+    background: var(--indigo);
+    padding: 110px 0;
+    text-align:center;
+    color: var(--texto-claro);
+  }
+  .hanko{
+    width: 74px; height:74px;
+    border-radius:50%;
+    border: 2px solid var(--oro);
+    margin: 0 auto 28px;
+    display:flex; align-items:center; justify-content:center;
+    font-family: var(--serif);
+    color: var(--oro-claro);
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+  #regalo h2{
+    font-family: var(--serif);
+    font-size: 34px;
+    color: var(--off-white);
+    margin-bottom: 20px;
+  }
+  #regalo p{
+    max-width: 560px;
+    margin: 0 auto 30px;
+    font-size: 15px;
+    line-height: 1.9;
+    opacity:.9;
+  }
+  .regalo-box{
+    display:inline-block;
+    border: 1px solid rgba(184,147,90,0.5);
+    padding: 22px 44px;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+
+  /* ---------- RSVP ---------- */
+  #rsvp{ background: var(--piedra); padding: 120px 0; }
+  form{
+    max-width: 620px;
+    margin: 0 auto;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .field{ display:flex; flex-direction:column; gap:6px; }
+  .field.full{ grid-column: 1 / -1; }
+  label{
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--texto-mute);
+  }
+  input, select, textarea{
+    font-family: var(--sans);
+    font-size: 14px;
+    padding: 12px 14px;
+    border: 1px solid #ddd3bd;
+    background: var(--off-white);
+    color: var(--texto-oscuro);
+  }
+  input:focus, select:focus, textarea:focus{
+    outline: none;
+    border-color: var(--oro);
+  }
+  textarea{ resize: vertical; min-height: 90px; }
+  .rsvp-submit{
+    grid-column: 1 / -1;
+    background: var(--terracota);
+    color: var(--off-white);
+    border: none;
+    padding: 15px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .3s;
+  }
+  .rsvp-submit:hover{ background: var(--hibisco); }
+  .rsvp-note{
+    grid-column: 1/-1;
+    text-align:center;
+    font-size: 12px;
+    color: var(--texto-mute);
+    font-style: italic;
+  }
+  #rsvp-success{
+    display:none;
+    grid-column: 1/-1;
+    text-align:center;
+    padding: 20px;
+    border: 1px solid var(--oro);
+    color: var(--indigo);
+    font-family: var(--serif);
+    font-size: 16px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background: var(--indigo);
+    text-align:center;
+    padding: 70px 24px 40px;
+    color: var(--texto-mute);
+  }
+  footer .rj{
+    font-family: var(--serif);
+    color: var(--oro-claro);
+    font-size: 26px;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+  footer .tag{
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--terracota);
+    font-size: 15px;
+    margin-bottom: 26px;
+  }
+  footer .hashtag{
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 26px;
+  }
+  footer .copy{ font-size: 11px; opacity:.6; }
+
+  @media (max-width: 860px){
+    .nav-links{
+      position:fixed; top:0; right:0; bottom:0;
+      width: 240px;
+      background: var(--indigo);
+      flex-direction:column;
+      padding: 100px 32px;
+      gap: 26px;
+      transform: translateX(100%);
+      transition: transform .4s ease;
+    }
+    .nav-links.open{ transform: translateX(0); }
+    .nav-toggle{ display:flex; }
+    .historia-grid, .boda-grid, .llegar-grid{ grid-template-columns: 1fr; }
+    .dress-grid{ grid-template-columns: 1fr; }
+    form{ grid-template-columns: 1fr; }
+    .historia-photos{ order: 2; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap">
+    <div class="nav-brand">R · J</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#historia">Historia</a></li>
+      <li><a href="#la-boda">La boda</a></li>
+      <li><a href="#itinerario">Itinerario</a></li>
+      <li><a href="#dress-code">Dress code</a></li>
+      <li><a href="#como-llegar">Cómo llegar</a></li>
+      <li><a href="#regalo">Regalo</a></li>
+      <li><a href="#rsvp">RSVP</a></li>
+    </ul>
+    <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="inicio">
+  <div class="hero-circles">
+    <span class="c1"></span><span class="c2"></span><span class="c3"></span>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">NOS CASAMOS</div>
+    <h1 class="hero-title">YŪGURE</h1>
+    <p class="hero-tagline">El atardecer que se convirtió en para siempre</p>
+    <div class="hero-divider"></div>
+    <div class="hero-names">RAÚL &amp; JUDITH</div>
+    <div class="hero-date"><span class="placeholder" title="Pendiente de confirmar">28 de Agosto de 2027</span></div>
+    <div class="hero-footer">BODEGA MARQUÉS DE VARGAS · <span class="placeholder" title="Pendiente de confirmar">[ CIUDAD ]</span></div>
+  </div>
+  <div class="scroll-cue"><span>DESCUBRE MÁS</span><span class="line"></span></div>
+</section>
+
+<!-- HISTORIA -->
+<section id="historia">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Nuestra historia</div>
+      <h2>Un cruce de caminos</h2>
+    </div>
+    <div class="historia-grid reveal">
+      <div class="historia-photos">
+        <div class="photo-ph">Foto de Raúl &amp; Judith<br><span class="placeholder">[ pendiente ]</span></div>
+        <div class="photo-ph">Foto del viaje a Japón<br><span class="placeholder">[ pendiente ]</span></div>
+      </div>
+      <div class="historia-text">
+        <div class="kanji-word">夕暮れ</div>
+        <div class="kanji-sub">Yūgure · «crepúsculo»</div>
+        <p>Raúl y Judith se conocieron por casualidad, en el cumpleaños de un amigo, y se enamoraron de viaje en viaje. En Japón —bajo un cielo que se teñía de naranja, rosa y violeta— decidieron que ese sería el color de su para siempre.</p>
+        <p>«Yūgure» significa crepúsculo: el instante exacto en que el día se convierte en noche, en que dos luces distintas se funden en una sola.</p>
+        <p>Así será esta boda: un cruce de caminos, de culturas y de personalidades que, como el sol al caer, encuentra su forma más bonita al unirse.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LA BODA -->
+<section id="la-boda">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="enso"></div>
+      <div class="eyebrow">Cuándo y dónde</div>
+      <h2>La boda</h2>
+      <p>Un círculo, no una fila. Un jardín japonés al atardecer.</p>
+    </div>
+    <div class="boda-grid reveal">
+      <div class="boda-card">
+        <div class="icon">婚</div>
+        <h3>La ceremonia</h3>
+        <div class="venue">Bodega Marqués de Vargas</div>
+        <div class="meta">
+          <span>Fecha</span>
+          <span class="placeholder" title="Pendiente">[ FECHA ]</span>
+        </div>
+        <div class="meta">
+          <span>Hora</span>
+          <span class="placeholder" title="Pendiente">[ HORA ]</span>
+        </div>
+        <div class="meta">
+          <span>Lugar exacto</span>
+          <span class="placeholder" title="Pendiente">[ DIRECCIÓN ]</span>
+        </div>
+        <p class="desc">Los asientos se distribuyen en semicírculo alrededor de un arco de ramas envejecidas y pampas, para que los invitados se vean entre ellos y formen parte del momento. Un camino de piedra natural sustituye a la alfombra tradicional.</p>
+      </div>
+      <div class="boda-card">
+        <div class="icon">宴</div>
+        <h3>La celebración</h3>
+        <div class="venue">Bodega Marqués de Vargas</div>
+        <div class="meta">
+          <span>Cóctel</span>
+          <span class="placeholder" title="Pendiente">[ HORA ]</span>
+        </div>
+        <div class="meta">
+          <span>Banquete</span>
+          <span class="placeholder" title="Pendiente">[ HORA ]</span>
+        </div>
+        <div class="meta">
+          <span>Lugar exacto</span>
+          <span class="placeholder" title="Pendiente">[ DIRECCIÓN ]</span>
+        </div>
+        <p class="desc">Farolillos de papel chochin entre los árboles del viñedo, velas bajas sobre las mesas y centros de ikebana asimétrico. Música en directo durante la cena que evoluciona a fiesta, con una zona chill-out para el after.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ITINERARIO -->
+<section id="itinerario">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">El día</div>
+      <h2>Itinerario</h2>
+      <p>Para que no te pierdas ni un instante del atardecer.</p>
+    </div>
+    <div class="timeline reveal">
+      <div class="t-item">
+        <div class="t-time placeholder" title="Pendiente">[ HORA ]</div>
+        <div class="t-label">Ceremonia</div>
+        <div class="t-desc">Bodega Marqués de Vargas</div>
+      </div>
+      <div class="t-item">
+        <div class="t-time placeholder" title="Pendiente">[ HORA ]</div>
+        <div class="t-label">Cóctel de bienvenida</div>
+        <div class="t-desc">Jardines de la bodega</div>
+      </div>
+      <div class="t-item">
+        <div class="t-time placeholder" title="Pendiente">[ HORA ]</div>
+        <div class="t-label">Banquete</div>
+        <div class="t-desc">Salón principal</div>
+      </div>
+      <div class="t-item">
+        <div class="t-time placeholder" title="Pendiente">[ HORA ]</div>
+        <div class="t-label">Primer baile y fiesta</div>
+        <div class="t-desc">Pista de baile</div>
+      </div>
+      <div class="t-item">
+        <div class="t-time placeholder" title="Pendiente">[ HORA ]</div>
+        <div class="t-label">After &amp; barra de mochi</div>
+        <div class="t-desc">Zona chill-out</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DRESS CODE -->
+<section id="dress-code">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Dress code</div>
+      <h2>Atardecer elegante</h2>
+      <p>Pedimos a nuestros invitados vestir en la paleta del ocaso: nada de negro estricto ni etiqueta formal.</p>
+    </div>
+
+    <div class="palette-row reveal">
+      <div class="swatch"><div class="dot" style="background:#1F2A44"></div><div class="name">Índigo Noche</div><div class="hex">#1F2A44</div></div>
+      <div class="swatch"><div class="dot" style="background:#D97B4F"></div><div class="name">Ocaso Terracota</div><div class="hex">#D97B4F</div></div>
+      <div class="swatch"><div class="dot" style="background:#D9718F"></div><div class="name">Rosa y Rojo</div><div class="hex">#D9718F</div></div>
+      <div class="swatch"><div class="dot" style="background:#C1485A"></div><div class="name">Rojo Hibisco</div><div class="hex">#C1485A</div></div>
+      <div class="swatch"><div class="dot" style="background:#B8935A"></div><div class="name">Oro Viejo</div><div class="hex">#B8935A</div></div>
+      <div class="swatch"><div class="dot" style="background:#F4F0E9;border-color:#e2d9c4"></div><div class="name">Piedra Caliza</div><div class="hex">#F4F0E9</div></div>
+    </div>
+
+    <div class="dress-grid reveal">
+      <div class="dress-card">
+        <h4>Ellos</h4>
+        <p>Traje sin corbata, o con corbata/pañuelo de seda en tono tierra. Se agradecen guiños sutiles a estampados orientales.</p>
+      </div>
+      <div class="dress-card">
+        <h4>Ellas</h4>
+        <p>Vestido largo o midi en tonos cálidos. Complementos inspirados en el obi japonés: cinturones anchos y tejidos con textura.</p>
+      </div>
+      <div class="dress-card">
+        <h4>Calzado</h4>
+        <p>Cómodo: la ceremonia y la fiesta transcurren sobre piedra y césped natural de la bodega.</p>
+      </div>
+    </div>
+
+    <div class="avoid-line reveal">Evitar el negro riguroso y el blanco, reservado para Judith · terracota · mostaza · coral · rosa palo · burdeos · oliva · dorado</div>
+
+    <div class="kit-box reveal" style="margin-top:56px;">
+      <h4>El kit de bienvenida</h4>
+      <p>Un abanico de papel en tonos atardecer y un mapa ilustrado de la bodega con forma de pergamino japonés, entregados en un sobre de washi.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMO LLEGAR -->
+<section id="como-llegar">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Información práctica</div>
+      <h2>Cómo llegar</h2>
+    </div>
+    <div class="llegar-grid reveal">
+      <div class="info-block">
+        <h4>Ubicación</h4>
+        <div class="info-line"><span>Lugar</span><span>Bodega Marqués de Vargas</span></div>
+        <div class="info-line"><span>Dirección</span><span class="placeholder" title="Pendiente">[ DIRECCIÓN COMPLETA ]</span></div>
+        <div class="info-line"><span>Aparcamiento</span><span class="placeholder" title="Pendiente">[ INFO PARKING ]</span></div>
+        <div class="info-line"><span>Transporte</span><span class="placeholder" title="Pendiente">[ BUS / TRASLADO ]</span></div>
+        <div class="map-ph">Mapa interactivo<br><span class="placeholder" title="Pendiente">[ pendiente de insertar ]</span></div>
+      </div>
+      <div class="info-block">
+        <h4>Alojamiento recomendado</h4>
+        <div class="hotel-list">
+          <div class="hotel-card">
+            <div><div class="h-name placeholder" title="Pendiente">[ Hotel 1 ]</div><div class="h-meta">Distancia a la bodega: [ pendiente ]</div></div>
+          </div>
+          <div class="hotel-card">
+            <div><div class="h-name placeholder" title="Pendiente">[ Hotel 2 ]</div><div class="h-meta">Distancia a la bodega: [ pendiente ]</div></div>
+          </div>
+          <div class="hotel-card">
+            <div><div class="h-name placeholder" title="Pendiente">[ Hotel 3 ]</div><div class="h-meta">Distancia a la bodega: [ pendiente ]</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGALO -->
+<section id="regalo">
+  <div class="wrap">
+    <div class="hanko reveal">R+J</div>
+    <h2 class="reveal">Vuestro regalo</h2>
+    <p class="reveal">Vuestra presencia es el mejor regalo que podemos recibir. Si aun así queréis tener un detalle con nosotros para nuestro próximo viaje, lo agradeceremos de corazón.</p>
+    <div class="regalo-box reveal placeholder" title="Pendiente">[ NÚMERO DE CUENTA / ENLACE A LISTA DE REGALOS ]</div>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section id="rsvp">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Confirmación</div>
+      <h2>RSVP</h2>
+      <p>Os esperamos en el crepúsculo. Confirmad antes del <span class="placeholder" title="Pendiente">[ FECHA LÍMITE ]</span></p>
+    </div>
+    <form id="rsvpForm" class="reveal">
+      <div class="field full">
+        <label>Nombre completo</label>
+        <input type="text" placeholder="Escribe tu nombre" required>
+      </div>
+      <div class="field">
+        <label>¿Asistirás?</label>
+        <select required>
+          <option value="">Selecciona una opción</option>
+          <option>Sí, allí estaré</option>
+          <option>No podré asistir</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Nº de acompañantes</label>
+        <input type="number" min="0" placeholder="0">
+      </div>
+      <div class="field full">
+        <label>Restricciones alimentarias</label>
+        <input type="text" placeholder="Alergias, intolerancias, vegetariano...">
+      </div>
+      <div class="field full">
+        <label>Mensaje para los novios (opcional)</label>
+        <textarea placeholder="Escribe aquí tu mensaje..."></textarea>
+      </div>
+      <button type="submit" class="rsvp-submit">Confirmar asistencia</button>
+      <div class="rsvp-note">Este formulario es una plantilla visual: para recibir las respuestas de verdad habrá que conectarlo a un servicio (Google Forms, Typeform, etc.)</div>
+      <div id="rsvp-success">Gracias — ¡tu confirmación ha sido registrada en esta vista previa! 🌇</div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="rj">R · J</div>
+  <div class="tag">YŪGURE — el atardecer que se convirtió en para siempre</div>
+  <div class="hashtag placeholder" title="Pendiente">[ #HASHTAG DE LA BODA ]</div>
+  <div class="copy">Raúl &amp; Judith · Bodega Marqués de Vargas</div>
+</footer>
+
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile menu toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // RSVP form (front-end only demo)
+  const form = document.getElementById('rsvpForm');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    document.getElementById('rsvp-success').style.display = 'block';
+    form.querySelectorAll('input, select, textarea').forEach(el => el.disabled = true);
+  });
+</script>
+
+</body>
+</html>
