@@ -247,14 +247,25 @@
     background: linear-gradient(160deg, var(--indigo-2), var(--indigo));
     border: 1px solid var(--oro);
     display:flex;
+    flex-direction: column;
     align-items:center;
-    justify-content:center;
+    justify-content:flex-start;
+    gap: 12px;
     color: var(--oro-claro);
     font-size: 12px;
     text-align:center;
     letter-spacing:1px;
     font-style: italic;
     padding: 12px;
+    overflow: hidden;
+  }
+  .photo-ph img{
+    display:block;
+    width: 100%;
+    flex: 1 1 0;
+    min-height: 0;
+    object-fit: cover;
+    object-position: center;
   }
   .photo-ph:nth-child(2){ margin-top: 36px; }
   .historia-text .kanji-word{
@@ -687,7 +698,7 @@
     <div class="hero-divider"></div>
     <div class="hero-names">RAÚL &amp; JUDITH</div>
     <div class="hero-date"><span class="placeholder" title="Pendiente de confirmar">28 de Agosto de 2027</span></div>
-    <div class="hero-footer">BODEGA MARQUÉS DE VARGAS · <span class="placeholder" title="Pendiente de confirmar">[ CIUDAD ]</span></div>
+    <div class="hero-footer">BODEGA MARQUÉS DE VARGAS · <span class="placeholder" title="Pendiente de confirmar">LOGROÑO</span></div>
   </div>
   <div class="scroll-cue"><span>DESCUBRE MÁS</span><span class="line"></span></div>
 </section>
@@ -701,8 +712,8 @@
     </div>
     <div class="historia-grid reveal">
       <div class="historia-photos">
-        <div class="photo-ph">Foto de Raúl &amp; Judith<br><span class="placeholder">[ pendiente ]</span></div>
-        <div class="photo-ph">Foto del viaje a Japón<br><span class="placeholder">[ pendiente ]</span></div>
+        <div class="photo-ph"><img src="img/judy_japon.JPG" alt="Foto de Raúl y Judith" class="photo-img"><span class="placeholder"></span></div>
+        <div class="photo-ph"><img src="img/raul_japon.JPG" alt="Foto del viaje a Japón" class="photo-img"><span class="placeholder"></span></div>
       </div>
       <div class="historia-text">
         <div class="kanji-word">夕暮れ</div>
@@ -728,10 +739,10 @@
       <div class="boda-card">
         <div class="icon">婚</div>
         <h3>La ceremonia</h3>
-        <div class="venue">Bodega Marqués de Vargas</div>
+        <div class="venue">Ermita de los Parrales, Baños de Rio Tobia</div>
         <div class="meta">
           <span>Fecha</span>
-          <span class="placeholder" title="Pendiente">[ FECHA ]</span>
+          <span class="placeholder" title="Pendiente">28 de Agosto de 2027</span>
         </div>
         <div class="meta">
           <span>Hora</span>
@@ -739,14 +750,14 @@
         </div>
         <div class="meta">
           <span>Lugar exacto</span>
-          <span class="placeholder" title="Pendiente">[ DIRECCIÓN ]</span>
+          <span class="placeholder" title="Pendiente">P.º la Ermita, 12, 26320 Baños de Río Tobía, La Rioja</span>
         </div>
         <p class="desc">Los asientos se distribuyen en semicírculo alrededor de un arco de ramas envejecidas y pampas, para que los invitados se vean entre ellos y formen parte del momento. Un camino de piedra natural sustituye a la alfombra tradicional.</p>
       </div>
       <div class="boda-card">
         <div class="icon">宴</div>
         <h3>La celebración</h3>
-        <div class="venue">Bodega Marqués de Vargas</div>
+        <div class="venue">Bodegas y Viñedos del Marqués de Vargas</div>
         <div class="meta">
           <span>Cóctel</span>
           <span class="placeholder" title="Pendiente">[ HORA ]</span>
@@ -757,7 +768,7 @@
         </div>
         <div class="meta">
           <span>Lugar exacto</span>
-          <span class="placeholder" title="Pendiente">[ DIRECCIÓN ]</span>
+          <span class="placeholder" title="Pendiente">Carr. Zaragoza, km. 6, 26006 Logroño, La Rioja</span>
         </div>
         <p class="desc">Farolillos de papel chochin entre los árboles del viñedo, velas bajas sobre las mesas y centros de ikebana asimétrico. Música en directo durante la cena que evoluciona a fiesta, con una zona chill-out para el after.</p>
       </div>
@@ -777,7 +788,7 @@
       <div class="t-item">
         <div class="t-time placeholder" title="Pendiente">[ HORA ]</div>
         <div class="t-label">Ceremonia</div>
-        <div class="t-desc">Bodega Marqués de Vargas</div>
+        <div class="t-desc">Ermita de los Parrales</div>
       </div>
       <div class="t-item">
         <div class="t-time placeholder" title="Pendiente">[ HORA ]</div>
@@ -787,7 +798,7 @@
       <div class="t-item">
         <div class="t-time placeholder" title="Pendiente">[ HORA ]</div>
         <div class="t-label">Banquete</div>
-        <div class="t-desc">Salón principal</div>
+        <div class="t-desc">Carpa principal</div>
       </div>
       <div class="t-item">
         <div class="t-time placeholder" title="Pendiente">[ HORA ]</div>
